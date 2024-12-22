@@ -1,41 +1,42 @@
 {
   "expo": {
-    "name": "e-scooter-rental",
+    "name": "E-Scooter",
     "slug": "e-scooter-rental",
     "version": "1.0.0",
-
     "scheme": "e-scooter-rental",
-    "web": {
-      "bundler": "metro",
-      "output": "static",
-      "favicon": "./assets/favicon.png"
+    "orientation": "portrait",
+    "icon": "./src/assets/main/icon.png",
+    "userInterfaceStyle": "light",
+    "splash": {
+      "image": "./src/assets/main/splash.png",
+      "resizeMode": "contain",
+      "backgroundColor": "##E7AB8F"
     },
-    "plugins": ["expo-router"],
+    "assetBundlePatterns": ["**/*"],
+    "ios": {
+      "supportsTablet": true,
+      "bundleIdentifier": "com.hsvf.escooterrental"
+    },
+    "android": {
+      "adaptiveIcon": {
+        "foregroundImage": "./src/assets/main/adaptive-icon.png",
+        "backgroundColor": "##E7AB8F"
+      },
+      "package": "com.hsvf.escooterrental"
+    },
     "experiments": {
       "typedRoutes": true,
 
       "tsconfigPaths": true
     },
-
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-
-    "userInterfaceStyle": "light",
-
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "assetBundlePatterns": ["**/*"],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#ffffff"
-      }
-    }
+    "plugins": [
+      "expo-router",
+      [
+        "@rnmapbox/maps",
+        {
+          "RNMapboxMapsDownloadToken": "sk.ey.."
+        }
+      ]
+    ]
   }
 }
