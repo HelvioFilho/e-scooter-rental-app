@@ -21,7 +21,4 @@ expo-env.d.ts
 # Temporary files created by Metro to check the health of the file watcher
 .metro-health-check*
 
-# filter sensitive files
 
-android/gradle.properties filter=hide_sensitive_gradle
-ios/Podfile filter=hide_sensitive_podfile
