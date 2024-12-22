@@ -14,7 +14,6 @@ install! 'cocoapods',
 prepare_react_native_project!
 
 # @generated begin @rnmapbox/maps-rnmapboxmapsimpl - expo prebuild (DO NOT MODIFY) sync-633d52bc04a162a621aa54a321be52ca1c20c7a5
-$RNMapboxMapsDownloadToken = 'sk.ey'
 # @generated end @rnmapbox/maps-rnmapboxmapsimpl
 target 'EScooter' do
   use_expo_modules!
