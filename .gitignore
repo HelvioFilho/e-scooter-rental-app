@@ -23,5 +23,5 @@ expo-env.d.ts
 
 # filter sensitive files
 
-gradle.properties filter=hide_sensitive_gradle
-Podfile filter=hide_sensitive_podfile
+android/gradle.properties filter=hide_sensitive_gradle
+ios/Podfile filter=hide_sensitive_podfile
