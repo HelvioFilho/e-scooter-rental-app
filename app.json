@@ -34,8 +34,7 @@
       [
         "@rnmapbox/maps",
         {
-          "RNMapboxMapsDownloadToken": "sk.your.mapbox.token",
-          "RNMapboxMapsVersion": "11.0.0"
+          "RNMapboxMapsDownloadToken": "sk.ey.your.mapbox.token"
         }
       ],
       [
