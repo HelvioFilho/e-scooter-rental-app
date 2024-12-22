@@ -34,7 +34,14 @@
       [
         "@rnmapbox/maps",
         {
-          "RNMapboxMapsDownloadToken": "sk.ey-your-key-here"
+          "RNMapboxMapsDownloadToken": "sk.your.mapbox.token",
+          "RNMapboxMapsVersion": "11.0.0"
+        }
+      ],
+      [
+        "expo-location",
+        {
+          "locationWhenInUsePermission": "Mostrar localização atual no mapa."
         }
       ]
     ]
