@@ -1,8 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 import Mapbox, {
   Camera,
   CircleLayer,
   Images,
+  LineLayer,
   LocationPuck,
   MapView,
   ShapeSource,
@@ -12,12 +13,23 @@ import { featureCollection, point } from "@turf/helpers";
 
 import pin from "@/assets/images/pin.png";
 import scooters from "@/data/scooters.json";
+import { OnPressEvent } from "@rnmapbox/maps/lib/typescript/src/types/OnPressEvent";
+import { getRoute } from "@/services/directions";
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_TOKEN || "");
 
 export default function Map() {
+  const [direction, setDirection] = useState();
   const points = scooters.map((scooter) => point([scooter.long, scooter.lat]));
+  const directionCoordinate = direction?.routes[0].geometry.coordinates;
 
+  const onPointPress = async (event: OnPressEvent) => {
+    const newDirection = await getRoute(
+      [-48.489722, -1.455833],
+      [event.coordinates.longitude, event.coordinates.latitude]
+    );
+    setDirection(newDirection);
+  };
   return (
     <>
       <MapView style={{ flex: 1 }} styleURL="mapbox://styles/mapbox/dark-v11">
@@ -31,7 +43,7 @@ export default function Map() {
           id="scooters"
           cluster
           shape={featureCollection(points)}
-          onPress={(event) => console.log(JSON.stringify(event, null, 2))}
+          onPress={onPointPress}
         >
           <SymbolLayer
             id="pointCount"
@@ -68,6 +80,30 @@ export default function Map() {
           />
           <Images images={{ pin }} />
         </ShapeSource>
+        {directionCoordinate && (
+          <ShapeSource
+            id="routeSource"
+            lineMetrics
+            shape={{
+              properties: {},
+              type: "Feature",
+              geometry: {
+                type: "LineString",
+                coordinates: directionCoordinate,
+              },
+            }}
+          >
+            <LineLayer
+              id="exampleLineLayer"
+              style={{
+                lineColor: "#42A2D9",
+                lineCap: "round",
+                lineJoin: "round",
+                lineWidth: 7,
+              }}
+            />
+          </ShapeSource>
+        )}
       </MapView>
     </>
   );
