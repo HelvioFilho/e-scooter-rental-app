@@ -1,6 +1,6 @@
 const URL = "https://api.mapbox.com/directions/v5/mapbox";
 
-type RouteResponse = {
+export type RouteResponse = {
   routes: Array<{
     distance: number;
     duration: number;

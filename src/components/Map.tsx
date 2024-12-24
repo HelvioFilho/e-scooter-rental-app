@@ -10,22 +10,25 @@ import Mapbox, {
   SymbolLayer,
 } from "@rnmapbox/maps";
 import { featureCollection, point } from "@turf/helpers";
+import * as Location from "expo-location";
 
 import pin from "@/assets/images/pin.png";
 import scooters from "@/data/scooters.json";
 import { OnPressEvent } from "@rnmapbox/maps/lib/typescript/src/types/OnPressEvent";
-import { getRoute } from "@/services/directions";
+import { getRoute, RouteResponse } from "@/services/directions";
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_TOKEN || "");
 
 export default function Map() {
-  const [direction, setDirection] = useState();
+  const [direction, setDirection] = useState<RouteResponse>();
   const points = scooters.map((scooter) => point([scooter.long, scooter.lat]));
   const directionCoordinate = direction?.routes[0].geometry.coordinates;
 
   const onPointPress = async (event: OnPressEvent) => {
+    const myLocation = await Location.getCurrentPositionAsync();
+
     const newDirection = await getRoute(
-      [-48.489722, -1.455833],
+      [myLocation.coords.longitude, myLocation.coords.latitude],
       [event.coordinates.longitude, event.coordinates.latitude]
     );
     setDirection(newDirection);
