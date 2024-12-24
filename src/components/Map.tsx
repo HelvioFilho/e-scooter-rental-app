@@ -3,7 +3,6 @@ import Mapbox, {
   Camera,
   CircleLayer,
   Images,
-  LineLayer,
   LocationPuck,
   MapView,
   ShapeSource,
@@ -16,6 +15,7 @@ import { useScooter } from "@/providers/ScooterProvider";
 import scooters from "@/data/scooters.json";
 
 import pin from "@/assets/images/pin.png";
+import LineRoute from "./LineRoute";
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_TOKEN || "");
 
@@ -83,28 +83,7 @@ export default function Map() {
           <Images images={{ pin }} />
         </ShapeSource>
         {directionCoordinates && (
-          <ShapeSource
-            id="routeSource"
-            lineMetrics
-            shape={{
-              properties: {},
-              type: "Feature",
-              geometry: {
-                type: "LineString",
-                coordinates: directionCoordinates,
-              },
-            }}
-          >
-            <LineLayer
-              id="exampleLineLayer"
-              style={{
-                lineColor: "#42A2D9",
-                lineCap: "round",
-                lineJoin: "round",
-                lineWidth: 7,
-              }}
-            />
-          </ShapeSource>
+          <LineRoute coordinates={directionCoordinates} />
         )}
       </MapView>
     </>
