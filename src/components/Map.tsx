@@ -1,36 +1,15 @@
 import React from "react";
-import Mapbox, {
-  Camera,
-  CircleLayer,
-  Images,
-  LocationPuck,
-  MapView,
-  ShapeSource,
-  SymbolLayer,
-} from "@rnmapbox/maps";
-import { featureCollection, point } from "@turf/helpers";
-import { OnPressEvent } from "@rnmapbox/maps/lib/typescript/src/types/OnPressEvent";
+import Mapbox, { Camera, LocationPuck, MapView } from "@rnmapbox/maps";
 
 import { useScooter } from "@/providers/ScooterProvider";
-import scooters from "@/data/scooters.json";
 
-import pin from "@/assets/images/pin.png";
 import LineRoute from "./LineRoute";
+import ScooterMarkers from "./ScooterMarkers";
 
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_TOKEN || "");
 
 export default function Map() {
-  const points = scooters.map((scooter) =>
-    point([scooter.long, scooter.lat], { scooter })
-  );
-
-  const { setSelectedScooter, directionCoordinates } = useScooter();
-
-  const onPointPress = async (event: OnPressEvent) => {
-    if (event?.features[0].properties?.scooter) {
-      setSelectedScooter(event.features[0].properties.scooter);
-    }
-  };
+  const { directionCoordinates } = useScooter();
 
   return (
     <>
@@ -41,47 +20,7 @@ export default function Map() {
           puckBearing="heading"
           pulsing={{ isEnabled: true }}
         />
-        <ShapeSource
-          id="scooters"
-          cluster
-          shape={featureCollection(points)}
-          onPress={onPointPress}
-        >
-          <SymbolLayer
-            id="pointCount"
-            style={{
-              textField: ["get", "point_count"],
-              textSize: 16,
-              textColor: "#ffffff",
-              textPitchAlignment: "map",
-            }}
-          />
-          <CircleLayer
-            id="clusteredScooters"
-            belowLayerID="pointCount"
-            filter={["has", "point_count"]}
-            style={{
-              circlePitchAlignment: "map",
-              circleColor: "#55A4C0",
-              circleRadius: 20,
-              circleOpacity: 0.5,
-              circleStrokeWidth: 1.5,
-              circleStrokeColor: "white",
-            }}
-          />
-          <SymbolLayer
-            id="symbolLocationSymbols"
-            filter={["!", ["has", "point_count"]]}
-            minZoomLevel={1}
-            style={{
-              iconImage: "pin",
-              iconAllowOverlap: true,
-              iconSize: 0.5,
-              iconAnchor: "bottom",
-            }}
-          />
-          <Images images={{ pin }} />
-        </ShapeSource>
+        <ScooterMarkers />
         {directionCoordinates && (
           <LineRoute coordinates={directionCoordinates} />
         )}
