@@ -18,7 +18,9 @@ type ScooterContextValue = {
   selectedScooter: ScooterProps | null;
   setSelectedScooter: (scooter: ScooterProps) => void;
   direction?: RouteResponse;
-  directionCoordinates?: [number, number][]; // Adicionado ao tipo
+  directionCoordinates?: [number, number][];
+  routeTime?: number;
+  routeDistance?: number;
 };
 
 const ScooterContext = createContext<ScooterContextValue | undefined>(
@@ -56,6 +58,8 @@ export default function ScooterProvider({ children }: PropsWithChildren) {
         setSelectedScooter,
         direction,
         directionCoordinates: direction?.routes[0].geometry.coordinates,
+        routeTime: direction?.routes[0].duration,
+        routeDistance: direction?.routes[0].distance,
       }}
     >
       {children}
