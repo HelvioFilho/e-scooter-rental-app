@@ -18,7 +18,7 @@
     "./src/theme"
   ],
   "testPathIgnorePatterns": [
-    "./src/__tests__/mocks",
+    "./src/__tests__/__mocks__",
     "./src/__tests__/utils",
     "./src/__tests__/coverage"
   ],
