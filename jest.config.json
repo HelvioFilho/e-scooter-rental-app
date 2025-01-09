@@ -15,13 +15,15 @@
     "./src/@types",
     "./src/assets",
     "./src/constants",
-    "./src/theme",
-    "./src/app/_layout.tsx"
+    "./src/theme"
   ],
   "testPathIgnorePatterns": [
     "./src/__tests__/mocks",
     "./src/__tests__/utils",
     "./src/__tests__/coverage"
   ],
-  "coverageDirectory": "./src/__tests__/coverage"
+  "coverageDirectory": "./src/__tests__/coverage",
+  "setupFiles": [
+    "<rootDir>/src/__tests__/__mocks__/react-native-gesture-handler.js"
+  ]
 }
