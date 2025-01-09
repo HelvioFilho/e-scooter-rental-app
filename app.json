@@ -26,7 +26,6 @@
     },
     "experiments": {
       "typedRoutes": true,
-
       "tsconfigPaths": true
     },
     "plugins": [
@@ -42,7 +41,8 @@
         {
           "locationWhenInUsePermission": "Mostrar localização atual no mapa."
         }
-      ]
+      ],
+      "expo-font"
     ]
   }
 }

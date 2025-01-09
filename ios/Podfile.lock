@@ -42,6 +42,8 @@ PODS:
     - ReactCommon/turbomodule/bridging
     - ReactCommon/turbomodule/core
     - Yoga
+  - ExpoSplashScreen (0.29.18):
+    - ExpoModulesCore
   - ExpoSystemUI (4.0.6):
     - ExpoModulesCore
   - ExpoWebBrowser (14.0.1):
@@ -1723,6 +1725,7 @@ DEPENDENCIES:
   - ExpoLinking (from `../node_modules/expo-linking/ios`)
   - ExpoLocation (from `../node_modules/expo-location/ios`)
   - ExpoModulesCore (from `../node_modules/expo-modules-core`)
+  - ExpoSplashScreen (from `../node_modules/expo-splash-screen/ios`)
   - ExpoSystemUI (from `../node_modules/expo-system-ui/ios`)
   - ExpoWebBrowser (from `../node_modules/expo-web-browser/ios`)
   - FBLazyVector (from `../node_modules/react-native/Libraries/FBLazyVector`)
@@ -1828,6 +1831,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/expo-location/ios"
   ExpoModulesCore:
     :path: "../node_modules/expo-modules-core"
+  ExpoSplashScreen:
+    :path: "../node_modules/expo-splash-screen/ios"
   ExpoSystemUI:
     :path: "../node_modules/expo-system-ui/ios"
   ExpoWebBrowser:
@@ -1979,6 +1984,7 @@ SPEC CHECKSUMS:
   ExpoLinking: a8332a219379ba80f8e612d5a5de4a3da446886e
   ExpoLocation: f13126dee9bf4c1499eb16b64f15afe9da9403f5
   ExpoModulesCore: 7ca0054f09a5205c1dac65fa98c2430472db50e6
+  ExpoSplashScreen: aa5c5eba706a5686b91861b53ced2996f1dd080d
   ExpoSystemUI: 2d729aea8219f03af1b1996c1d14488a01fea94a
   ExpoWebBrowser: f08aaf1c8a02af8a768d83793186cb6d2c69f529
   FBLazyVector: 1bf99bb46c6af9a2712592e707347315f23947aa
