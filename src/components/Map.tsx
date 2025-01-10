@@ -9,7 +9,8 @@ import ScooterMarkers from "./ScooterMarkers";
 Mapbox.setAccessToken(process.env.EXPO_PUBLIC_MAPBOX_TOKEN || "");
 
 export default function Map() {
-  const { directionCoordinates } = useScooter();
+  const { reservedScooter, reservedDirectionCoordinates, shouldDisplayRoute } =
+    useScooter();
 
   return (
     <>
@@ -21,9 +22,11 @@ export default function Map() {
           pulsing={{ isEnabled: true }}
         />
         <ScooterMarkers />
-        {directionCoordinates && (
-          <LineRoute coordinates={directionCoordinates} />
-        )}
+        {shouldDisplayRoute &&
+          reservedScooter &&
+          reservedDirectionCoordinates && (
+            <LineRoute coordinates={reservedDirectionCoordinates} />
+          )}
       </MapView>
     </>
   );

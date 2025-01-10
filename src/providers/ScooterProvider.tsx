@@ -15,12 +15,24 @@ type ScooterProps = {
 };
 
 type ScooterContextValue = {
-  selectedScooter: ScooterProps | null;
+  selectedScooter: ScooterProps | undefined;
   setSelectedScooter: (scooter: ScooterProps) => void;
-  direction?: RouteResponse;
-  directionCoordinates?: [number, number][];
-  routeTime?: number;
-  routeDistance?: number;
+  reservedScooter?: ScooterProps;
+  setReservedScooter: (scooter?: ScooterProps) => void;
+
+  selectedDirection?: RouteResponse;
+  selectedDirectionCoordinates?: [number, number][];
+  selectedRouteTime?: number;
+  selectedRouteDistance?: number;
+
+  reservedDirection?: RouteResponse;
+  setReservedDirection: (direction?: RouteResponse) => void;
+  reservedDirectionCoordinates?: [number, number][];
+  reservedRouteTime?: number;
+  reservedRouteDistance?: number;
+
+  shouldDisplayRoute: boolean;
+  setShouldDisplayRoute: (value: boolean) => void;
 };
 
 const ScooterContext = createContext<ScooterContextValue | undefined>(
@@ -28,27 +40,30 @@ const ScooterContext = createContext<ScooterContextValue | undefined>(
 );
 
 export default function ScooterProvider({ children }: PropsWithChildren) {
-  const [selectedScooter, setSelectedScooter] = useState<ScooterProps | null>(
-    null
-  );
-  const [direction, setDirection] = useState<RouteResponse>();
+  const [selectedScooter, setSelectedScooter] = useState<ScooterProps>();
+  const [reservedScooter, setReservedScooter] = useState<ScooterProps>();
+
+  const [selectedDirection, setSelectedDirection] = useState<RouteResponse>();
+  const [reservedDirection, setReservedDirection] = useState<RouteResponse>();
+
+  const [shouldDisplayRoute, setShouldDisplayRoute] = useState(false);
 
   useEffect(() => {
-    const fetchDirections = async () => {
-      const myLocation = await Location.getCurrentPositionAsync();
-
-      if (selectedScooter) {
-        const newDirection = await getRoute(
-          [myLocation.coords.longitude, myLocation.coords.latitude],
-          [selectedScooter.long, selectedScooter.lat]
-        );
-        setDirection(newDirection);
+    const fetchSelectedDirections = async () => {
+      if (!selectedScooter) {
+        setSelectedDirection(undefined);
+        return;
       }
+
+      const myLocation = await Location.getCurrentPositionAsync();
+      const newDirection = await getRoute(
+        [myLocation.coords.longitude, myLocation.coords.latitude],
+        [selectedScooter.long, selectedScooter.lat]
+      );
+      setSelectedDirection(newDirection);
     };
 
-    if (selectedScooter) {
-      fetchDirections();
-    }
+    fetchSelectedDirections();
   }, [selectedScooter]);
 
   return (
@@ -56,10 +71,24 @@ export default function ScooterProvider({ children }: PropsWithChildren) {
       value={{
         selectedScooter,
         setSelectedScooter,
-        direction,
-        directionCoordinates: direction?.routes[0].geometry.coordinates,
-        routeTime: direction?.routes[0].duration,
-        routeDistance: direction?.routes[0].distance,
+        reservedScooter,
+        setReservedScooter,
+
+        selectedDirection,
+        selectedDirectionCoordinates:
+          selectedDirection?.routes[0].geometry.coordinates,
+        selectedRouteTime: selectedDirection?.routes[0].duration,
+        selectedRouteDistance: selectedDirection?.routes[0].distance,
+
+        reservedDirection,
+        setReservedDirection,
+        reservedDirectionCoordinates:
+          reservedDirection?.routes[0].geometry.coordinates,
+        reservedRouteTime: reservedDirection?.routes[0].duration,
+        reservedRouteDistance: reservedDirection?.routes[0].distance,
+
+        shouldDisplayRoute,
+        setShouldDisplayRoute,
       }}
     >
       {children}
