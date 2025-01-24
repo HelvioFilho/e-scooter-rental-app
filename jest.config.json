@@ -8,7 +8,8 @@
     "^.+\\.jsx?$": "babel-jest"
   },
   "moduleNameMapper": {
-    "^@/(.*)$": "<rootDir>/src/$1"
+    "^@/(.*)$": "<rootDir>/src/$1",
+    "^@rnmapbox/maps$": "<rootDir>/src/__tests__/__mocks__/@rnmapbox/maps.tsx"
   },
   "collectCoverageFrom": ["./src/**/*.{ts,tsx}"],
   "coveragePathIgnorePatterns": [
