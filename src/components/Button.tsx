@@ -14,6 +14,7 @@ type ButtonProps = {
 export function Button({ onPress, title, icon, style, ...props }: ButtonProps) {
   return (
     <TouchableOpacity
+      accessibilityRole="button"
       activeOpacity={0.8}
       style={[styles.button, style]}
       onPress={onPress}
