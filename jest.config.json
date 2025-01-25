@@ -9,7 +9,8 @@
   },
   "moduleNameMapper": {
     "^@/(.*)$": "<rootDir>/src/$1",
-    "^@rnmapbox/maps$": "<rootDir>/src/__tests__/__mocks__/@rnmapbox/maps.tsx"
+    "^@rnmapbox/maps$": "<rootDir>/src/__tests__/__mocks__/@rnmapbox/maps.tsx",
+    "^@/providers/ScooterProvider$": "<rootDir>/src/__tests__/__mocks__/ScooterProvider.tsx"
   },
   "collectCoverageFrom": ["./src/**/*.{ts,tsx}"],
   "coveragePathIgnorePatterns": [
