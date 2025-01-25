@@ -29,10 +29,30 @@ export const SymbolLayer: React.FC<ViewProps & { id: string }> = ({
   ...props
 }) => <View id={id} testID={`SymbolLayerMock-${id}`} {...props} />;
 
+export const MapView: React.FC<ViewProps> = ({ children, ...props }) => (
+  <View testID="MapViewMock" {...props}>
+    {children}
+  </View>
+);
+
+export const Camera: React.FC<ViewProps> = (props) => (
+  <View testID="CameraMock" {...props} />
+);
+
+export const LocationPuck: React.FC<ViewProps> = (props) => (
+  <View testID="LocationPuckMock" {...props} />
+);
+
+const setAccessToken = jest.fn();
+
 export default {
   ShapeSource,
   LineLayer,
   CircleLayer,
   Images,
   SymbolLayer,
+  MapView,
+  Camera,
+  LocationPuck,
+  setAccessToken,
 };
